@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <RollingFile name="RollingFileLogger" fileName="D:\\study\\git\\crm\\logs\\app.log"
+                     filePattern="D:\\study\\git\\crm\\logs\\app-%d{yyyy-MM-dd-HH-mm}-%i.log">
+            <Policies>
+                <!-- Kích thước tối đa của file log trước khi tạo file mới -->
+                <SizeBasedTriggeringPolicy size="10MB"/>
+            </Policies>
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n</Pattern>
+            </PatternLayout>
+            <!-- DefaultRolloverStrategy để giữ tối đa 10 file log -->
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+        <Console name="ConsoleLogger" target="SYSTEM_OUT">
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n</Pattern>
+            </PatternLayout>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="RollingFileLogger"/>
+            <AppenderRef ref="ConsoleLogger"/>
+        </Root>
+    </Loggers>
+</Configuration>

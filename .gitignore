@@ -2,3 +2,5 @@
 /.metadata
 /apache-tomcat-8.5.99
 /Servers
+/lib
+/logs
