@@ -12,6 +12,14 @@ public class RoleService {
 
 	private static final Logger LOGGER = LogManager.getLogger(RoleService.class);
 
+	public boolean updateRole(int id, String name, String des) {
+		if (name != null && des != null && !name.isBlank() && !des.isBlank()) {
+			return new RoleDao().updateRole(id, name, des);
+		}
+		LOGGER.warn("Invalid input provided for updating role. Name: '{}', Description: '{}'", name, des);
+		return false;
+	}
+
 	public List<Role> getRoles() {
 		return new RoleDao().getRoles();
 	}
@@ -20,7 +28,7 @@ public class RoleService {
 		if (name != null && des != null && !name.isBlank() && !des.isBlank()) {
 			return new RoleDao().addRole(name, des);
 		}
-		LOGGER.warn("Invalid input: name={}, des={}", name, des);
+		LOGGER.warn("Invalid input provided for adding role. Name: '{}', Description: '{}'", name, des);
 		return false;
 	}
 
