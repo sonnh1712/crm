@@ -25,3 +25,4 @@ The CRM Employee Management System is a web-based application designed to stream
 ## Features
 - **Role Management**:
   - Create.
+  - Read.
