@@ -17,19 +17,19 @@ import com.crm.service.RoleService;
 @WebServlet(urlPatterns = { "/add-role" })
 public class AddRoleController extends HttpServlet {
 
-	private static final Logger logger = LogManager.getLogger(AddRoleController.class);
+	private static final Logger LOGGER = LogManager.getLogger(AddRoleController.class);
 	private final RoleService roleService = new RoleService();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-		resp.setCharacterEncoding("UTF-8");
-		req.getRequestDispatcher("/view/add-role.jsp").include(req, resp);
-
+		LOGGER.info("Handling GET request for /add-role");
+		req.getRequestDispatcher("/view/add-role.jsp").forward(req, resp);
+		LOGGER.info("Completed GET request for /add-role");
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		LOGGER.info("Handling POST request for /add-role");
 
 		req.setCharacterEncoding("UTF-8");
 		resp.setCharacterEncoding("UTF-8");
@@ -37,19 +37,15 @@ public class AddRoleController extends HttpServlet {
 		String name = req.getParameter("name");
 		String des = req.getParameter("des");
 
-		logger.info("Request /add-role name = {} - des = {}", name, des);
+		LOGGER.info("POST /add-role parameters - name: {}, des: {}", name, des);
 
-		try {
-			String message = roleService.addRole(name, des) ? "Thêm role thành công" : "Thêm role thất bại";
-			req.setAttribute("message", message);
-			logger.info("Request /add-role {}", message.contains("thành công") ? "success" : "fail");
-		} catch (SQLException e) {
-			req.setAttribute("message", "Tên role đã tồn tại");
-			logger.error("Error occurred while processing request /add-role", e);
-		}
+		String message = roleService.addRole(name, des) ? "Role added successfully" : "Failed to add role";
+		req.setAttribute("message", message);
 
-		req.getRequestDispatcher("/view/add-role.jsp").include(req, resp);
+		LOGGER.info("POST /add-role result: {}", message);
 
+		req.getRequestDispatcher("/view/add-role.jsp").forward(req, resp);
+		LOGGER.info("Completed POST request for /add-role");
 	}
 
 }
