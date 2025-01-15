@@ -6,6 +6,13 @@ public class Role {
 	private String name;
 	private String des;
 
+	public Role(int id, String name, String des) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.des = des;
+	}
+
 	public int getId() {
 		return id;
 	}
